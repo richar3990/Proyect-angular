@@ -10,6 +10,7 @@ import { Global } from '../../services/global';
   providers: [ProjectService]
 })
 export class ProjectsComponent implements OnInit {
+  public projects: Project[];
 
   constructor(
     private _projectService: ProjectService
@@ -20,7 +21,9 @@ export class ProjectsComponent implements OnInit {
   getProjects(): any{
     this._projectService.getProjects().subscribe(
       response => {
-        console.log(response);
+        if (response.projects){
+          this.projects = response.projects;
+        }
       },
       error => {
         console.log(error as any);
