@@ -16,6 +16,8 @@ export class CreateComponent implements OnInit {
   public title: string;
   public project: Project;
   public status: string;
+  // tslint:disable-next-line:variable-name
+  public save_project: string;
   public filesToUpload: Array<File>;
   public url: string;
 
@@ -36,14 +38,13 @@ export class CreateComponent implements OnInit {
     this._projectService.saveProject(this.project).subscribe(
       response => {
         if (response.project){
-          this.status = 'success';
           // Subir la imagen
           this._uploadService.makeFileRequest(Global.url + 'upload-image/' + response.project._id, [], this.filesToUpload, 'image')
             .then((result: any) => {
-              console.log(result);
+              this.save_project = response.project._id;
+              this.status = 'success';
+              form.reset();
             });
-
-          form.reset();
         }else{
           this.status = 'failed';
         }
