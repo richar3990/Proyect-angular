@@ -3,6 +3,7 @@ import { Project } from '../../models/project';
 import { ProjectService } from '../../services/project.service';
 import { Global } from '../../services/global';
 import { Router, ActivatedRoute, Params} from '@angular/router';
+import {UploadService} from '../../services/upload.service';
 
 
 @Component({
@@ -18,14 +19,15 @@ export class DetailComponent implements OnInit {
   constructor(
     private _projectService: ProjectService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+
   ) {
     this.url = Global.url;
   }
 
   ngOnInit(): void {
     this._route.params.subscribe(params =>{
-      let id = params.id;
+      const id = params.id;
       this.getProject(id);
     });
   }
@@ -39,5 +41,16 @@ export class DetailComponent implements OnInit {
       }
     );
   }
-
+  deleteProject(id): any {
+    this._projectService.deleteProject(id).subscribe(
+      response => {
+        if (response.project){
+          this._router.navigate(['/proyectos']);
+        }
+      },
+      error => {
+        console.log(error as any);
+      }
+    );
+  }
 }

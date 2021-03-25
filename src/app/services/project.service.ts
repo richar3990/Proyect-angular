@@ -21,11 +21,20 @@ export class ProjectService {
     return this._http.post(this.url + 'save-project', params,{ headers: headers});
   }
   getProjects(): Observable<any>{
-    const headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(this.url + 'projects', { headers: headers});
   }
   getProject(id): Observable<any>{
-    const headers = new HttpHeaders().set('Content-Type', 'aplication/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(this.url + 'project/' + id, { headers: headers});
+  }
+  deleteProject(id): Observable<any>{
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.delete(this.url + 'project/' + id, { headers: headers});
+  }
+  updateProject(project): Observable<any>{
+    const params = JSON.stringify(project);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.put(this.url + 'update-project/' + project._id , params, {headers: headers});
   }
 }
