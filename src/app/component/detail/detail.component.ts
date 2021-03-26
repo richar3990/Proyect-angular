@@ -15,6 +15,7 @@ import {UploadService} from '../../services/upload.service';
 export class DetailComponent implements OnInit {
   public url: string;
   public project: Project;
+  public confirm: boolean;
 
   constructor(
     private _projectService: ProjectService,
@@ -23,6 +24,7 @@ export class DetailComponent implements OnInit {
 
   ) {
     this.url = Global.url;
+    this.confirm = false;
   }
 
   ngOnInit(): void {
@@ -52,5 +54,8 @@ export class DetailComponent implements OnInit {
         console.log(error as any);
       }
     );
+  }
+  setConfirm(confirm): void{
+    this.confirm = confirm;
   }
 }

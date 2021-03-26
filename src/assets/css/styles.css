@@ -167,8 +167,9 @@ form input[type="submit"],
 }
 .button-edit,
 .button-delete{
-  width: 10%;
+  width: 11%;
   float: left;
+  text-align: center;
   margin-right: 10px;
   text-decoration: none;
 }
@@ -238,4 +239,9 @@ form input[disabled]{
 .project a{
   text-decoration: none;
   color: black;
+}
+.confirm{
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
 }
